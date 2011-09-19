@@ -25,7 +25,7 @@ for my $server ( @servers ) {
 
     my $dir = File::Temp::tempdir( CLEANUP => 1 );
     my $app = builder {
-        enable 'ServerName', name => 'Plack-Middleware-ServerName/0.01';
+        enable 'ServerName', name => 'Plack-Middleware-ServerName/0.02';
         sub { sleep 3; [200, [ 'Content-Type' => 'text/plain' ], [ "Hello World" ]] };
     };
 
@@ -37,7 +37,7 @@ for my $server ( @servers ) {
                 sleep 1;
                 my $ua = LWP::UserAgent->new;
                 my $res = $ua->get("http://localhost:$port/hello");
-                is( $res->header( 'Server' ), 'Plack-Middleware-ServerName/0.01' );
+                is( $res->header( 'Server' ), 'Plack-Middleware-ServerName/0.02' );
             }
             elsif ( defined $pid ) {
                 # slow response
